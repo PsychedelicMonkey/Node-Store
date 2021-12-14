@@ -3,13 +3,14 @@ const passport = require('passport');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 
+const { isGuest } = require('../../middleware/auth');
 const User = require('../../models/User');
 
-router.get('/login', (req, res) => {
+router.get('/login', isGuest, (req, res) => {
 	return res.render('auth/login');
 });
 
-router.get('/register', (req, res) => {
+router.get('/register', isGuest, (req, res) => {
 	return res.render('auth/register');
 });
 
