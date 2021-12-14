@@ -15,6 +15,9 @@ const connectDB = require('./config/db');
 // Connect to MongoDB
 connectDB();
 
+// Passport config
+require('./config/passport')(passport);
+
 // Initialize express
 const app = express();
 
@@ -44,7 +47,9 @@ app.use(flash());
 // Global variables in templates
 app.use((req, res, next) => {
 	res.locals = {
+		csrfToken: req.csrfToken(),
 		error: req.flash('error'),
+		user: req.user,
 	};
 
 	next();
@@ -52,6 +57,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', require('./routes/index'));
+app.use('/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 3000;
 
