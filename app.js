@@ -58,6 +58,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
+app.use('/auth/google', require('./routes/auth/google'));
 
 const PORT = process.env.PORT || 3000;
 
