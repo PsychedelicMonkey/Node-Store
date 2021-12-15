@@ -52,6 +52,7 @@ app.use((req, res, next) => {
 	}
 
 	res.locals = {
+		cart: req.cookies.cart,
 		csrfToken: req.csrfToken(),
 		error: req.flash('error'),
 		user: req.user,
@@ -64,6 +65,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/auth/google', require('./routes/auth/google'));
+app.use('/cart', require('./routes/cart'));
 app.use('/products', require('./routes/products'));
 
 const PORT = process.env.PORT || 3000;

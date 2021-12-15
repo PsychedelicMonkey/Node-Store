@@ -10,8 +10,10 @@
 
 			<p class="mt-4"><%= product.description %></p>
 
-			<form action="" method="post">
+			<form action="/cart" method="post">
 				<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+				<input type="hidden" name="productId" value="<%= product._id %>" />
 
 				<div class="input-group mt-2 mb-3">
 					<div class="input-group-prepend">
@@ -23,13 +25,17 @@
 						name="quantity"
 						id="quantity"
 						class="form-control text-center"
-						value="1"
+						value="<%= quantity %>"
 					/>
 
 					<div class="input-group-append">
 						<button id="add-btn" class="btn btn-outline-secondary">+</button>
 					</div>
 				</div>
+
+				<% if (itemInCart) { %>
+				<p class="text-success">This item is in your cart</p>
+				<% } %>
 
 				<button type="submit" class="btn btn-primary">Add to Cart</button>
 			</form>
