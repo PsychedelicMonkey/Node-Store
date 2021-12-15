@@ -7,11 +7,11 @@ const { isGuest } = require('../../middleware/auth');
 const User = require('../../models/User');
 
 router.get('/login', isGuest, (req, res) => {
-	return res.render('auth/login');
+	return res.render('auth/login', { title: 'Log In' });
 });
 
 router.get('/register', isGuest, (req, res) => {
-	return res.render('auth/register');
+	return res.render('auth/register', { title: 'Register' });
 });
 
 router.get('/logout', (req, res) => {
