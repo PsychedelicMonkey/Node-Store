@@ -12,7 +12,7 @@ const loginRequired = (req, res, next) => {
 	}
 
 	req.flash('error', 'Please log in to access this page');
-	return res.redirect('/auth/login');
+	return res.redirect(`/auth/login?url=${req.originalUrl}`);
 };
 
 module.exports = { isGuest, loginRequired };

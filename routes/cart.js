@@ -1,27 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const { getCartTotalItems } = require('../utils/cart');
-
+const {
+	getCartProducts,
+	getCartTotalItems,
+	getOrderTotal,
+} = require('../utils/cart');
 const Product = require('../models/Product');
 
 router.get('/', async (req, res, next) => {
 	try {
 		const { cart } = req.cookies;
 
-		const products = await Product.find({ _id: { $in: cart.items } });
-
-		products.map((prod) => {
-			const cartProd = cart.items.find(
-				(item) => item._id === prod._id.toString()
-			);
-			prod.quantity = cartProd.quantity;
-			prod.total = prod.price * prod.quantity;
-		});
-
-		const orderTotal = products.reduce((sum, item) => {
-			return sum + item.total;
-		}, 0);
+		const products = await getCartProducts(cart);
+		const orderTotal = getOrderTotal(products);
 
 		return res.render('cart', { products, orderTotal });
 	} catch (err) {

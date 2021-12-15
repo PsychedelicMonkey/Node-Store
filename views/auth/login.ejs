@@ -4,7 +4,7 @@
 
 		<%- include('../partials/errorMsg.ejs') %>
 
-		<form action="/auth/login" method="post">
+		<form action="<%= url %>" method="post">
 			<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
 			<div class="form-group">

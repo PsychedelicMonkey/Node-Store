@@ -7,7 +7,12 @@ const { isGuest } = require('../../middleware/auth');
 const User = require('../../models/User');
 
 router.get('/login', isGuest, (req, res) => {
-	return res.render('auth/login', { title: 'Log In' });
+	let { url } = req.query;
+
+	// Set redirect url
+	url ? (url = `/auth/login?url=${url}`) : (url = '/auth/login');
+
+	return res.render('auth/login', { title: 'Log In', url });
 });
 
 router.get('/register', isGuest, (req, res) => {
@@ -20,14 +25,15 @@ router.get('/logout', (req, res) => {
 	return res.redirect('/');
 });
 
-router.post(
-	'/login',
+router.post('/login', (req, res, next) => {
+	const { url } = req.query;
+
 	passport.authenticate('local', {
-		successRedirect: '/',
+		successRedirect: url || '/',
 		failureRedirect: '/auth/login',
 		failureFlash: true,
-	})
-);
+	})(req, res, next);
+});
 
 router.post(
 	'/register',

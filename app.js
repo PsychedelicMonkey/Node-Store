@@ -79,6 +79,7 @@ app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/auth/google', require('./routes/auth/google'));
 app.use('/cart', require('./routes/cart'));
+app.use('/checkout', require('./routes/checkout'));
 app.use('/products', require('./routes/products'));
 
 const PORT = process.env.PORT || 3000;
