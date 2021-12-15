@@ -1,0 +1,56 @@
+<section class="container mt-2">
+	<%- include('./partials/errorMsg.ejs') %>
+
+	<h1>Cart</h1>
+
+	<% if (cart.items.length > 0) { %>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Total</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% products.forEach(prod => { %>
+			<tr>
+				<td><%= prod.name %></td>
+				<td>$<%= prod.price %></td>
+				<td><%= prod.quantity %></td>
+				<td><b>$<%= prod.total.toFixed(2) %></b></td>
+				<td>
+					<form
+						action="/cart/<%= prod._id %>"
+						method="post"
+						enctype="application/x-www-form-urlencoded"
+					>
+						<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+						<input type="hidden" name="_method" value="DELETE" />
+
+						<button type="submit" class="btn btn-danger">&Cross;</button>
+					</form>
+				</td>
+			</tr>
+			<% }) %>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><b>$<%= orderTotal.toFixed(2) %></b></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<a href="/checkout" class="btn btn-primary">Proceed to Checkout</a>
+	<% } else { %>
+	<h4>Your cart is empty</h4>
+	<a href="/" class="btn btn-primary">Back to Home</a>
+	<% } %>
+</section>
