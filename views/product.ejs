@@ -1,0 +1,59 @@
+<section class="container">
+	<div class="row mt-4">
+		<div class="col-md-6">
+			<img src="<%= product.image %>" alt="" class="img-fluid" />
+		</div>
+
+		<div class="col-md-4">
+			<h3><%= product.name %></h3>
+			<h5 class="text-muted">$<%= product.price %></h5>
+
+			<p class="mt-4"><%= product.description %></p>
+
+			<form action="" method="post">
+				<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+				<div class="input-group mt-2 mb-3">
+					<div class="input-group-prepend">
+						<button id="remove-btn" class="btn btn-outline-secondary">-</button>
+					</div>
+
+					<input
+						type="text"
+						name="quantity"
+						id="quantity"
+						class="form-control text-center"
+						value="1"
+					/>
+
+					<div class="input-group-append">
+						<button id="add-btn" class="btn btn-outline-secondary">+</button>
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Add to Cart</button>
+			</form>
+		</div>
+	</div>
+</section>
+
+<script>
+	const removeBtn = document.getElementById('remove-btn');
+	const addBtn = document.getElementById('add-btn');
+
+	const quantityInput = document.getElementById('quantity');
+
+	removeBtn.addEventListener('click', function (e) {
+		e.preventDefault();
+
+		if (quantityInput.value > 1) {
+			quantityInput.value--;
+		}
+	});
+
+	addBtn.addEventListener('click', function (e) {
+		e.preventDefault();
+
+		quantityInput.value++;
+	});
+</script>

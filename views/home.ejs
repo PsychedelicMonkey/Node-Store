@@ -10,8 +10,8 @@
 				<img src="<%= prod.image %>" class="card-img-top" alt="" />
 				<div class="card-body">
 					<h5 class="card-title"><%= prod.name %></h5>
-					<p class="card-text">$<%= prod.price %></p>
-					<a href="#" class="btn btn-primary">Add to Cart</a>
+					<p class="card-text text-muted">$<%= prod.price %></p>
+					<a href="/products/<%= prod._id %>" class="btn btn-primary">View</a>
 				</div>
 			</div>
 		</div>

@@ -46,6 +46,11 @@ app.use(flash());
 
 // Global variables in templates
 app.use((req, res, next) => {
+	// Create cart cookie
+	if (!req.cookies.cart) {
+		res.cookie('cart', { items: [], total: 0 });
+	}
+
 	res.locals = {
 		csrfToken: req.csrfToken(),
 		error: req.flash('error'),
