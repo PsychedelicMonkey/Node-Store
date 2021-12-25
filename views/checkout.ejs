@@ -33,6 +33,12 @@
 			</table>
 		</div>
 
-		<div class="col-md-6"></div>
+		<div class="col-md-6">
+			<form action="/checkout" method="post">
+				<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+				<button type="submit" class="btn btn-primary">Confirm Order</button>
+			</form>
+		</div>
 	</div>
 </section>
